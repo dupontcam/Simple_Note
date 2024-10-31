@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+
+    <color name="my_light_primary">#90A4AE</color>
+    <!-- Tema claro -->
+    <color name="my_card_background_Day_color">#78909C</color>
+    <color name="orange">#FFFF8000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="teal_200">#80CBC4</color>
+    <color name="teal_700">#00796B</color>
+    <color name="gray">#808080</color>
+    <color name="blue_gray_50">#ECEFF1</color>
+    <color name="blue_gray_300">#90A4AE</color>
+    <color name="blue_gray_400">#78909C</color>
+
+    <!-- Tema escuro -->
+    <color name="blue_gray_800">#37474F</color>
+    <color name="my_card_background_Night_color">#545452</color>
+    <color name="black">#FF000000</color>
+    <color name="dark_gray">#2e2e2e</color>
+    <color name="purple_200">#FFBB86FC</color>
 </resources>
