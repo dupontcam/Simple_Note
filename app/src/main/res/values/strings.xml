@@ -3,4 +3,7 @@
     <string name="Grid_view">Grid</string>
     <string name="Search">Search</string>
     <string name="List_view">List</string>
+    <string name="Note_title">Title</string>
+    <string name="Note_description">Description</string>
+    <string name="Save_note">Save Note</string>
 </resources>
