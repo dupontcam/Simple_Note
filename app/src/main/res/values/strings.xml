@@ -6,4 +6,10 @@
     <string name="Note_title">Title</string>
     <string name="Note_description">Description</string>
     <string name="Save_note">Save Note</string>
+    <string name="Deletar">Delete</string>
+    <string name="Salvar_edição">Update</string>
+    <string name="Sample_note_title">Sample Note Title</string>
+    <string name="Sample_note_description">Sample Note Description</string>
+    <string name="Date">01/08/2024</string>
+    <string name="Time">15:03</string>
 </resources>
