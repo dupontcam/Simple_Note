@@ -1,6 +1,8 @@
 package br.com.cursoandroid.simplenote;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -66,6 +69,24 @@ public class AddNote extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_save, menu);
+
+        // Obtenha os itens do menu
+        MenuItem itemSave = menu.findItem(R.id.save);
+
+        // Verifique o tema atual e defina a cor apropriada
+        int iconColor = getResources().getColor(R.color.black, getTheme()); // Tema claro
+        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+            iconColor = getResources().getColor(R.color.white, getTheme()); // Tema escuro
+        }
+
+        // Aplique a cor aos ícones usando AppCompatResources para garantir compatibilidade
+        Drawable iconSave = AppCompatResources.getDrawable(this, R.drawable.baseline_check_24);
+
+        if (iconSave != null) {
+            iconSave.setTint(iconColor);
+            itemSave.setIcon(iconSave);
+        }
+
         return true;
     }
 

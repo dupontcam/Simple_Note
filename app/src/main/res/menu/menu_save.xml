@@ -6,5 +6,6 @@
         android:id="@+id/save"
         android:icon="@drawable/baseline_check_24"
         android:title="@string/Save_note"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        android:iconTint="?attr/colorControlNormal"/>
 </menu>

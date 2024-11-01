@@ -2,6 +2,8 @@ package br.com.cursoandroid.simplenote;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -86,6 +89,27 @@ public class MainActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        // Obtenha os itens do menu
+        MenuItem itemList = menu.findItem(R.id.list);
+        MenuItem itemGrid = menu.findItem(R.id.grid);
+
+        // Verifique o tema atual e defina a cor apropriada
+        int iconColor = getResources().getColor(R.color.black, getTheme()); // Tema claro
+        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+            iconColor = getResources().getColor(R.color.white, getTheme()); // Tema escuro
+        }
+
+        // Aplique a cor aos ícones usando AppCompatResources para garantir compatibilidade
+        Drawable iconList = AppCompatResources.getDrawable(this, R.drawable.baseline_view_list_24);
+        Drawable iconGrid = AppCompatResources.getDrawable(this, R.drawable.baseline_grid_view_24);
+
+        if (iconList != null && iconGrid != null) {
+            iconList.setTint(iconColor);
+            iconGrid.setTint(iconColor);
+            itemList.setIcon(iconList);
+            itemGrid.setIcon(iconGrid);
+        }
+
         search(menu);
 
         return super.onCreateOptionsMenu(menu);
@@ -114,14 +138,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void search(Menu menu) {
 
-        // Referência ao item de adicionar
-        MenuItem addItem = menu.findItem(R.id.fabAdd);
+        // Referência ao item Grid e Lista
+        MenuItem gridItem = menu.findItem(R.id.grid);
+        MenuItem listItem = menu.findItem(R.id.list);
+
+
 
         // Referência ao item de pesquisa
         MenuItem searchItem = menu.findItem(R.id.app_bar_search);
 
-        if (searchItem != null) { // Verificar se o item de menu existe
-            SearchView searchView = (SearchView) searchItem.getActionView(); // Criar o SearchView
+        if (searchItem != null) {
+            SearchView searchView = (SearchView) searchItem.getActionView();
             searchView.setQueryHint("Pesquise anotações...");
 
             // Listener para capturar o texto de busca
@@ -141,14 +168,17 @@ public class MainActivity extends AppCompatActivity {
 
             // Listener para quando a pesquisa é iniciada
             searchView.setOnSearchClickListener(v -> {
-                addItem.setVisible(false);
-
+                // Ocultar os ícones de list/grid
+                gridItem.setVisible(false);
+                listItem.setVisible(false);
             });
 
-            // Listener para quando a pesquisa é finalizada
+            // Listener para quando a pesquisa é finalizada (opcional)
             searchView.setOnCloseListener(() -> {
-                addItem.setVisible(true);
-                invalidateOptionsMenu(); // Força a recriação do menu para garantir o posicionamento correto
+                // Recrie o menu para mostrar os ícones de list/grid, se necessário
+                gridItem.setVisible(true);
+                listItem.setVisible(true);
+                invalidateOptionsMenu();
                 return false;
             });
         }

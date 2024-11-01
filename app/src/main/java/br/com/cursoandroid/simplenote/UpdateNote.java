@@ -1,6 +1,8 @@
 package br.com.cursoandroid.simplenote;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +14,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -80,6 +83,28 @@ public class UpdateNote extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_update_delete, menu);
+
+        // Obtenha os itens do menu
+        MenuItem itemDelete = menu.findItem(R.id.delete);
+        MenuItem itemUpdate = menu.findItem(R.id.edit);
+
+        // Verifique o tema atual e defina a cor apropriada
+        int iconColor = getResources().getColor(R.color.black, getTheme()); // Tema claro
+        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+            iconColor = getResources().getColor(R.color.white, getTheme()); // Tema escuro
+        }
+
+        // Aplique a cor aos ícones usando AppCompatResources para garantir compatibilidade
+        Drawable iconDelete = AppCompatResources.getDrawable(this, R.drawable.baseline_delete_24);
+        Drawable iconUpdate = AppCompatResources.getDrawable(this, R.drawable.baseline_check_24);
+
+        if (iconDelete != null && iconUpdate != null) {
+            iconDelete.setTint(iconColor);
+            iconUpdate.setTint(iconColor);
+            itemDelete.setIcon(iconDelete);
+            itemUpdate.setIcon(iconUpdate);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 

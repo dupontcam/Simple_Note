@@ -5,21 +5,24 @@
     <item
         android:id="@+id/grid"
         android:icon="@drawable/baseline_grid_view_24"
-        android:title="@string/Grid_view"
         android:orderInCategory="200"
-        app:showAsAction="ifRoom" />
+        android:title="@string/Grid_view"
+        app:showAsAction="ifRoom"
+        android:iconTint="?attr/colorControlNormal"/>
     <item
         android:id="@+id/app_bar_search"
         android:icon="@drawable/baseline_search_24"
-        android:title="@string/Search"
         android:orderInCategory="100"
-        app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="ifRoom" />
+        android:title="@string/Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom"
+        android:iconTint="?attr/colorControlNormal"/>
     <item
         android:id="@+id/list"
-        android:icon="@drawable/baseline_list_24"
-        android:title="@string/List_view"
+        android:icon="@drawable/baseline_view_list_24"
         android:orderInCategory="300"
-        app:showAsAction="ifRoom" />
+        android:title="@string/List_view"
+        app:showAsAction="ifRoom"
+        android:iconTint="?attr/colorControlNormal"/>
 
 </menu>
