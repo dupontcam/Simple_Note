@@ -7,10 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SearchView;
@@ -34,54 +32,102 @@ import br.com.cursoandroid.simplenote.model.Note;
 public class MainActivity extends AppCompatActivity {
 
     private boolean isGridLayout = false;
-    Toolbar toolbar;
-    RecyclerView recyclerView;
-    Adapter adapter;
+    private RecyclerView recyclerView;
+    private Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
+        // Aplica o tema antes de criar a Activity
+        applyThemeFromPreferences();
+
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        toolbar = findViewById(R.id.materialToolbar);
+        setupUIElements();
+        loadNotesAndSetupRecyclerView();
+    }
+
+    private void applyThemeFromPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String themePreference = sharedPreferences.getString("theme", "DefaultTheme");
+
+        switch (themePreference) {
+            case "BlueTheme":
+                setTheme(R.style.Theme_Blue);
+                break;
+            case "GreenTheme":
+                setTheme(R.style.Theme_Green);
+                break;
+            case "BlackTheme":
+                setTheme(R.style.Theme_Black);
+                break;
+            case "YellowTheme":
+                setTheme(R.style.Theme_Yellow);
+                break;
+            case "OrangeTheme":
+                setTheme(R.style.Theme_Orange);
+                break;
+            case "PurpleTheme":
+                setTheme(R.style.Theme_Purple);
+                break;
+            case "DeepPurpleTheme":
+                setTheme(R.style.Theme_DeepPurple);
+                break;
+            case "IndigoTheme":
+                setTheme(R.style.Theme_Indigo);
+                break;
+            case "DeepOrangeTheme":
+                setTheme(R.style.Theme_DeepOrange);
+                break;
+            case "TealTheme":
+                setTheme(R.style.Theme_Teal);
+                break;
+            default:
+                setTheme(R.style.Theme_SimpleNote);
+        }
+    }
+
+    private void setupUIElements() {
+        Toolbar toolbar = findViewById(R.id.materialToolbar);
         setSupportActionBar(toolbar);
 
+        FloatingActionButton fab = findViewById(R.id.fabAdd);
+        fab.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AddNote.class)));
+
+        recyclerView = findViewById(R.id.listOfNotes);
+    }
+
+    private void loadNotesAndSetupRecyclerView() {
         NoteDatabase db = new NoteDatabase(this);
         List<Note> notes = db.getNotes();
         if (notes == null) {
             notes = new ArrayList<>();
         }
 
-        // Encontra o FloatingActionButton pelo ID
-        FloatingActionButton fab = findViewById(R.id.fabAdd);
-
-        // Define o OnClickListener para o FAB
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Inicia a Activity AddNote
-                startActivity(new Intent(MainActivity.this, AddNote.class));
-            }
-        });
-
-        recyclerView = findViewById(R.id.listOfNotes);
-
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        isGridLayout = sharedPreferences.getBoolean("isGridLayout", false); // false é o valor padrão
+        isGridLayout = sharedPreferences.getBoolean("isGridLayout", false);
 
         adapter = new Adapter(notes, isGridLayout);
-
         recyclerView.setAdapter(adapter);
-
-        // Define o layout inicial como lista
         setLayoutManager();
+    }
 
+    private void setLayoutManager() {
+        if (isGridLayout) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
+        adapter.setGridLayout(isGridLayout);
+        recyclerView.getRecycledViewPool().clear(); // Limpar o cache (opcional)
     }
 
     @Override
@@ -92,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         // Obtenha os itens do menu
         MenuItem itemList = menu.findItem(R.id.list);
         MenuItem itemGrid = menu.findItem(R.id.grid);
+        MenuItem itemTemas = menu.findItem(R.id.submenu_themes);
 
         // Verifique o tema atual e defina a cor apropriada
         int iconColor = getResources().getColor(R.color.black, getTheme()); // Tema claro
@@ -102,12 +149,15 @@ public class MainActivity extends AppCompatActivity {
         // Aplique a cor aos ícones usando AppCompatResources para garantir compatibilidade
         Drawable iconList = AppCompatResources.getDrawable(this, R.drawable.baseline_view_list_24);
         Drawable iconGrid = AppCompatResources.getDrawable(this, R.drawable.baseline_grid_view_24);
+        Drawable iconTemas = AppCompatResources.getDrawable(this, R.drawable.baseline_color_lens_24);
 
-        if (iconList != null && iconGrid != null) {
+        if (iconList != null && iconGrid != null && iconTemas != null) {
             iconList.setTint(iconColor);
             iconGrid.setTint(iconColor);
+            iconTemas.setTint(iconColor);
             itemList.setIcon(iconList);
             itemGrid.setIcon(iconGrid);
+            itemTemas.setIcon(iconTemas);
         }
 
         search(menu);
@@ -116,31 +166,88 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-
-        if (item.getItemId() == R.id.list) {
+        if (item.getItemId() == R.id.theme_blue) {
+            saveThemePreference("BlueTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_green) {
+            saveThemePreference("GreenTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_black) {
+            saveThemePreference("BlackTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_yellow) {
+            saveThemePreference("YellowTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_orange) {
+            saveThemePreference("OrangeTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_purple) {
+            saveThemePreference("PurpleTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_deepPurple) {
+            saveThemePreference("DeepPurpleTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_indigo) {
+            saveThemePreference("IndigoTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_deepOrange) {
+            saveThemePreference("DeepOrangeTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_teal) {
+            saveThemePreference("TealTheme");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.theme_default) {
+            saveThemePreference("default");
+            applyThemeFromPreferences();
+            recreate();
+            return true;
+        } else if (item.getItemId() == R.id.list) {
             isGridLayout = false;
             invalidateOptionsMenu(); // Força a atualização do menu
             setLayoutManager();
+            return true;
         } else if (item.getItemId() == R.id.grid) {
             isGridLayout = true;
             invalidateOptionsMenu(); // Força a atualização do menu
             setLayoutManager();
+            return true;
         }
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isGridLayout", isGridLayout);
         editor.apply();
-        return super.onOptionsItemSelected(item);
 
+        return super.onOptionsItemSelected(item);
     }
 
-    public void search(Menu menu) {
+    private void search(Menu menu) {
 
         // Referência ao item Grid e Lista
         MenuItem gridItem = menu.findItem(R.id.grid);
         MenuItem listItem = menu.findItem(R.id.list);
+        MenuItem temasItem = menu.findItem(R.id.submenu_themes);
 
 
 
@@ -155,13 +262,13 @@ public class MainActivity extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    performSearch(query);
+                    adapter.filter(query);
                     return true;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    performSearch(newText);
+                    adapter.filter(newText);
                     return true;
                 }
             });
@@ -171,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
                 // Ocultar os ícones de list/grid
                 gridItem.setVisible(false);
                 listItem.setVisible(false);
+                temasItem.setVisible(false);
             });
 
             // Listener para quando a pesquisa é finalizada (opcional)
@@ -178,21 +286,18 @@ public class MainActivity extends AppCompatActivity {
                 // Recrie o menu para mostrar os ícones de list/grid, se necessário
                 gridItem.setVisible(true);
                 listItem.setVisible(true);
+                temasItem.setVisible(true);
                 invalidateOptionsMenu();
                 return false;
             });
         }
     }
 
-    private void performSearch(String query) {
-
-        // Obter as anotações do banco de dados com base na consulta
-        NoteDatabase db = new NoteDatabase(this);
-        List<Note> searchResults = db.searchNotes(query);
-
-        // Atualizar o Adapter com os resultados da pesquisa
-        adapter.setNotes(searchResults);
-        adapter.notifyDataSetChanged();
+    private void saveThemePreference(String theme) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("theme", theme);
+        editor.apply();
     }
 
     // Atualizar o menu com o ícone correto visível
@@ -201,16 +306,5 @@ public class MainActivity extends AppCompatActivity {
         menu.findItem(R.id.grid).setVisible(!isGridLayout);
         menu.findItem(R.id.list).setVisible(isGridLayout);
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    // Método para definir o layout do RecyclerView
-    private void setLayoutManager() {
-        if (isGridLayout) {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        } else {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        }
-        adapter.setGridLayout(isGridLayout);
-        recyclerView.getRecycledViewPool().clear(); // Limpar o cache (opcional)
     }
 }

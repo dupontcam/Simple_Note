@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cursoandroid.simplenote.R;
@@ -121,4 +122,23 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         }
     }
+
+    public void filter(String text) {
+
+        List<Note> filteredNotes = new ArrayList<>();
+        for (Note note : notes) {  // Mantenha uma lista original para referência
+            if (note.getTitle().contains(text) || note.getDescription().contains(text)) {
+                filteredNotes.add(note);
+            }
+        }
+        updateList(filteredNotes);
+    }
+
+    public void updateList(List<Note> newNotes) {
+
+        notes.clear();
+        notes.addAll(newNotes);
+        notifyDataSetChanged();
+    }
+
 }
