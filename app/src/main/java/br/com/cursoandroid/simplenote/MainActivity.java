@@ -227,19 +227,25 @@ public class MainActivity extends AppCompatActivity {
             isGridLayout = false;
             invalidateOptionsMenu(); // Força a atualização do menu
             setLayoutManager();
+            saveLayoutPreference(isGridLayout);
             return true;
+
         } else if (item.getItemId() == R.id.grid) {
             isGridLayout = true;
             invalidateOptionsMenu(); // Força a atualização do menu
             setLayoutManager();
+            saveLayoutPreference(isGridLayout);
             return true;
         }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void saveLayoutPreference(boolean isGridLayout) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isGridLayout", isGridLayout);
         editor.apply();
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void search(Menu menu) {
