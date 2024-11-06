@@ -14,11 +14,9 @@
     <string name="Sample_note_description">Sample Note Description</string>
     <string name="Date">01/08/2024</string>
     <string name="Time">15:03</string>
-    <string name="Temas">Temas</string>
     <string name="theme_blue">theme blue</string>
     <string name="theme_green">theme green</string>
     <string name="theme_default">theme default</string>
-    <string name="themes">themes</string>
     <string name="theme_black">theme black</string>
     <string name="theme_yellow">theme yellow</string>
     <string name="theme_orange">theme orange</string>
@@ -27,4 +25,5 @@
     <string name="theme_indigo">theme indigo</string>
     <string name="theme_deepOrange">theme deeporange</string>
     <string name="theme_teal">theme teal</string>
+    <string name="themes_list">themes list</string>
 </resources>

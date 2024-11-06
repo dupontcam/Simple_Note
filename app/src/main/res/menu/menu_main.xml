@@ -30,43 +30,6 @@
         android:id="@+id/submenu_themes"
         android:icon="@drawable/baseline_color_lens_24"
         android:orderInCategory="400"
-        android:title="@string/themes"
-        app:showAsAction="always">
-        <!-- Submenu declarado dentro do item principal -->
-        <menu>
-            <item
-                android:id="@+id/theme_blue"
-                android:title="@string/theme_blue" />
-            <item
-                android:id="@+id/theme_green"
-                android:title="@string/theme_green" />
-            <item
-                android:id="@+id/theme_black"
-                android:title="@string/theme_black" />
-            <item
-                android:id="@+id/theme_yellow"
-                android:title="@string/theme_yellow" />
-            <item
-                android:id="@+id/theme_orange"
-                android:title="@string/theme_orange" />
-            <item
-                android:id="@+id/theme_purple"
-                android:title="@string/theme_purple" />
-            <item
-                android:id="@+id/theme_deepPurple"
-                android:title="@string/theme_deepPurple" />
-            <item
-                android:id="@+id/theme_indigo"
-                android:title="@string/theme_indigo" />
-            <item
-                android:id="@+id/theme_deepOrange"
-                android:title="@string/theme_deepOrange" />
-            <item
-                android:id="@+id/theme_teal"
-                android:title="@string/theme_teal" />
-            <item
-                android:id="@+id/theme_default"
-                android:title="@string/theme_default" />
-        </menu>
-    </item>
+        android:title="@string/themes_list"
+        app:showAsAction="always"></item>
 </menu>

@@ -1,16 +1,20 @@
 package br.com.cursoandroid.simplenote;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+
         // Obtenha os itens do menu
         MenuItem itemList = menu.findItem(R.id.list);
         MenuItem itemGrid = menu.findItem(R.id.grid);
@@ -168,61 +173,80 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.theme_blue) {
-            saveThemePreference("BlueTheme");
-            applyThemeFromPreferences();
-            recreate();
+        if (item.getItemId() == R.id.submenu_themes) {
+            // Crie o PopupMenu usando o contexto da Activity (tema padrão)
+            PopupMenu popupMenu = new PopupMenu(this, findViewById(R.id.submenu_themes));
+
+            // Infle o submenu do arquivo dedicado
+            popupMenu.getMenuInflater().inflate(R.menu.submenu_themes, popupMenu.getMenu());
+
+            // Adicione ações para cada item, se necessário
+            popupMenu.setOnMenuItemClickListener(subMenuitem -> {
+                int itemId = subMenuitem.getItemId();
+
+                if (itemId == R.id.theme_blue) {
+                    saveThemePreference("BlueTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_green) {
+                    saveThemePreference("GreenTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_black) {
+                    saveThemePreference("BlackTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_yellow) {
+                    saveThemePreference("YellowTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_orange) {
+                    saveThemePreference("OrangeTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_purple) {
+                    saveThemePreference("PurpleTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_deepPurple) {
+                    saveThemePreference("DeepPurpleTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_indigo) {
+                    saveThemePreference("IndigoTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_deepOrange) {
+                    saveThemePreference("DeepOrangeTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_teal) {
+                    saveThemePreference("TealTheme");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                } else if (itemId == R.id.theme_default) {
+                    saveThemePreference("default");
+                    applyThemeFromPreferences();
+                    recreate();
+                    return true;
+                }
+                return true;
+            });
+
+            // Exiba o PopupMenu
+            popupMenu.show();
             return true;
-        } else if (item.getItemId() == R.id.theme_green) {
-            saveThemePreference("GreenTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_black) {
-            saveThemePreference("BlackTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_yellow) {
-            saveThemePreference("YellowTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_orange) {
-            saveThemePreference("OrangeTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_purple) {
-            saveThemePreference("PurpleTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_deepPurple) {
-            saveThemePreference("DeepPurpleTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_indigo) {
-            saveThemePreference("IndigoTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_deepOrange) {
-            saveThemePreference("DeepOrangeTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_teal) {
-            saveThemePreference("TealTheme");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
-        } else if (item.getItemId() == R.id.theme_default) {
-            saveThemePreference("default");
-            applyThemeFromPreferences();
-            recreate();
-            return true;
+
         } else if (item.getItemId() == R.id.list) {
             isGridLayout = false;
             invalidateOptionsMenu(); // Força a atualização do menu

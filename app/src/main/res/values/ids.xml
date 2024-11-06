@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="theme_blue" type="id"/>
+    <item name="theme_green" type="id"/>
+    <item name="theme_black" type="id"/>
+    <item name="theme_yellow" type="id"/>
+    <item name="theme_orange" type="id"/>
+    <item name="theme_purple" type="id"/>
+    <item name="theme_deepPurple" type="id"/>
+    <item name="theme_indigo" type="id"/>
+    <item name="theme_deepOrange" type="id"/>
+    <item name="theme_teal" type="id"/>
+    <item name="theme_default" type="id"/>
+</resources>
