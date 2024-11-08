@@ -1,5 +1,7 @@
 package br.com.cursoandroid.simplenote;
 
+import static br.com.cursoandroid.simplenote.utils.ThemeUtils.applyThemeFromPreferences;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -37,6 +39,9 @@ public class UpdateNote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
+        applyThemeFromPreferences(this);
+
         setContentView(R.layout.activity_update_note);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

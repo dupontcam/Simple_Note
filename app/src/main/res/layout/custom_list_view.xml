@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        app:cardBackgroundColor="@color/blue_grey_600"
         app:cardCornerRadius="8dp"
         app:cardElevation="15dp"
+        app:cardBackgroundColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
-            android:background="@color/blue_grey_400"
             android:padding="5dp"
             app:cardCornerRadius="8dp">
 
@@ -43,7 +42,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/postit" />
+                    app:srcCompat="@drawable/notes" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

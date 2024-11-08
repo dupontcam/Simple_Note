@@ -1,19 +1,18 @@
 package br.com.cursoandroid.simplenote;
 
-import android.content.Context;
+import static br.com.cursoandroid.simplenote.utils.ThemeUtils.applyThemeFromPreferences;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.cursoandroid.simplenote.adapter.Adapter;
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         EdgeToEdge.enable(this);
         // Aplica o tema antes de criar a Activity
-        applyThemeFromPreferences();
 
+        applyThemeFromPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -59,45 +59,6 @@ public class MainActivity extends AppCompatActivity {
         loadNotesAndSetupRecyclerView();
     }
 
-    private void applyThemeFromPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        String themePreference = sharedPreferences.getString("theme", "DefaultTheme");
-
-        switch (themePreference) {
-            case "BlueTheme":
-                setTheme(R.style.Theme_Blue);
-                break;
-            case "GreenTheme":
-                setTheme(R.style.Theme_Green);
-                break;
-            case "BlackTheme":
-                setTheme(R.style.Theme_Black);
-                break;
-            case "YellowTheme":
-                setTheme(R.style.Theme_Yellow);
-                break;
-            case "OrangeTheme":
-                setTheme(R.style.Theme_Orange);
-                break;
-            case "PurpleTheme":
-                setTheme(R.style.Theme_Purple);
-                break;
-            case "DeepPurpleTheme":
-                setTheme(R.style.Theme_DeepPurple);
-                break;
-            case "IndigoTheme":
-                setTheme(R.style.Theme_Indigo);
-                break;
-            case "DeepOrangeTheme":
-                setTheme(R.style.Theme_DeepOrange);
-                break;
-            case "TealTheme":
-                setTheme(R.style.Theme_Teal);
-                break;
-            default:
-                setTheme(R.style.Theme_SimpleNote);
-        }
-    }
 
     private void setupUIElements() {
         Toolbar toolbar = findViewById(R.id.materialToolbar);
@@ -114,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         List<Note> notes = db.getNotes();
         if (notes == null) {
             notes = new ArrayList<>();
+        } else {
+            // Ordena a lista em ordem decrescente por data e hora
+            Collections.sort(notes, (note1, note2) -> {
+                int dateComparison = note2.getDate().compareTo(note1.getDate());
+                if (dateComparison == 0) {
+                    return note2.getTime().compareTo(note1.getTime());
+                }
+                return dateComparison;
+            });
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -123,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         setLayoutManager();
     }
+
+
 
     private void setLayoutManager() {
         if (isGridLayout) {
@@ -186,57 +158,52 @@ public class MainActivity extends AppCompatActivity {
 
                 if (itemId == R.id.theme_blue) {
                     saveThemePreference("BlueTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_green) {
                     saveThemePreference("GreenTheme");
-                    applyThemeFromPreferences();
-                    recreate();
-                    return true;
-                } else if (itemId == R.id.theme_black) {
-                    saveThemePreference("BlackTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_yellow) {
                     saveThemePreference("YellowTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_orange) {
                     saveThemePreference("OrangeTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_purple) {
                     saveThemePreference("PurpleTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_deepPurple) {
                     saveThemePreference("DeepPurpleTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_indigo) {
                     saveThemePreference("IndigoTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_deepOrange) {
                     saveThemePreference("DeepOrangeTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_teal) {
                     saveThemePreference("TealTheme");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 } else if (itemId == R.id.theme_default) {
                     saveThemePreference("default");
-                    applyThemeFromPreferences();
+                    applyThemeFromPreferences(this);
                     recreate();
                     return true;
                 }
@@ -292,13 +259,13 @@ public class MainActivity extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    adapter.filter(query);
+                    performSearch(query);
                     return true;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    adapter.filter(newText);
+                    performSearch(newText);
                     return true;
                 }
             });
@@ -321,6 +288,17 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             });
         }
+    }
+
+    private void performSearch(String query) {
+
+        // Obter as anotações do banco de dados com base na consulta
+        NoteDatabase db = new NoteDatabase(this);
+        List<Note> searchResults = db.searchNotes(query);
+
+        // Atualizar o Adapter com os resultados da pesquisa
+        adapter.setNotes(searchResults);
+        adapter.notifyDataSetChanged();
     }
 
     private void saveThemePreference(String theme) {

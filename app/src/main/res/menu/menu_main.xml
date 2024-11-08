@@ -31,5 +31,6 @@
         android:icon="@drawable/baseline_color_lens_24"
         android:orderInCategory="400"
         android:title="@string/themes_list"
-        app:showAsAction="always"></item>
+        app:showAsAction="always"
+        android:iconTint="?attr/colorControlNormal"/>
 </menu>

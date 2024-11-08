@@ -18,12 +18,13 @@ import br.com.cursoandroid.simplenote.model.Note;
 
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    static List<Note> notes;
+    static private List<Note> originalNotes;
+
     private boolean isGridLayout;
 
-    public Adapter(List<Note> notes, boolean isGridLayout) {
+    public Adapter(List<Note> originalNotes, boolean isGridLayout) {
         this.isGridLayout = isGridLayout;
-        this.notes = notes;
+        Adapter.originalNotes = originalNotes;
     }
 
     public void setGridLayout(boolean isGridLayout) {
@@ -49,23 +50,23 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (holder instanceof GridViewHolder) {
             GridViewHolder gridHolder = (GridViewHolder) holder;
-            gridHolder.noteTitle.setText(notes.get(position).getTitle());
-            gridHolder.noteDescription.setText(notes.get(position).getDescription());
+            gridHolder.noteTitle.setText(originalNotes.get(position).getTitle());
+            gridHolder.noteDescription.setText(originalNotes.get(position).getDescription());
         } else if (holder instanceof ListViewHolder) {
             ListViewHolder listHolder = (ListViewHolder) holder;
-            listHolder.noteTitle.setText(notes.get(position).getTitle());
-            listHolder.nDate.setText(notes.get(position).getDate());
-            listHolder.nTime.setText(notes.get(position).getTime());
+            listHolder.noteTitle.setText(originalNotes.get(position).getTitle());
+            listHolder.nDate.setText(originalNotes.get(position).getDate());
+            listHolder.nTime.setText(originalNotes.get(position).getTime());
         }
     }
 
     @Override
     public int getItemCount() {
-        return notes.size();
+        return originalNotes.size();
     }
 
     public void setNotes(List<Note> searchResults) {
-        this.notes = searchResults;
+        originalNotes = searchResults;
     }
 
     public static class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -86,7 +87,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public void onClick(View view) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                Note clickedNote = notes.get(position);
+                Note clickedNote = originalNotes.get(position);
                 Intent intent = new Intent(view.getContext(), UpdateNote.class);
                 intent.putExtra("noteId", clickedNote.getID()); // Passe o ID ou outros dados da anotação
                 intent.putExtra("noteTitle", clickedNote.getTitle());
@@ -113,7 +114,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public void onClick(View view) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                Note clickedNote = notes.get(position);
+                Note clickedNote = originalNotes.get(position);
                 Intent intent = new Intent(view.getContext(), UpdateNote.class);
                 intent.putExtra("noteId", clickedNote.getID()); // Passe o ID ou outros dados da anotação
                 intent.putExtra("noteTitle", clickedNote.getTitle());
@@ -123,22 +124,5 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void filter(String text) {
-
-        List<Note> filteredNotes = new ArrayList<>();
-        for (Note note : notes) {  // Mantenha uma lista original para referência
-            if (note.getTitle().contains(text) || note.getDescription().contains(text)) {
-                filteredNotes.add(note);
-            }
-        }
-        updateList(filteredNotes);
-    }
-
-    public void updateList(List<Note> newNotes) {
-
-        notes.clear();
-        notes.addAll(newNotes);
-        notifyDataSetChanged();
-    }
 
 }
