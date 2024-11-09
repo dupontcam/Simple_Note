@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         EdgeToEdge.enable(this);
-        // Aplica o tema antes de criar a Activity
 
+        // Aplica o tema antes de criar a Activity
         applyThemeFromPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

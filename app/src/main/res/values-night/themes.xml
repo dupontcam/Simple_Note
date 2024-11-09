@@ -1,14 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.SimpleNote" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Tema Escuro -->
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorOnPrimary">@color/grey_400</item>
-        <item name="android:windowBackground">@color/grey_600</item>
+        <item name="colorPrimary">@color/blue_grey_700</item>
+        <item name="colorOnPrimary">@color/blue_grey_300</item>
+        <item name="android:windowBackground">@color/blue_grey_500</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:colorControlNormal">@color/white</item> <!-- Ícones do menu -->
         <item name="popupMenuStyle">@style/ThemePopupStyle</item>
         <item name="cardBackgroundColor">@style/Theme.CardView</item>
     </style>
+
+    <style name="Theme.SimpleNote" parent="Base.Theme.SimpleNote" />
 
     <style name="ThemePopupStyle" parent="Widget.Material3.PopupMenu">
         <item name="android:popupBackground">?attr/colorPrimary</item>
@@ -17,5 +19,93 @@
 
     <style name="Theme.CardView" parent="Widget.Material3.CardView.Filled">
         <item name="cardBackgroundColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <!-- Tema Azul -->
+    <style name="Theme.Blue" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/blue_600</item>
+        <item name="colorOnPrimary">@color/blue_100</item>
+        <item name="android:windowBackground">@color/blue_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tema Verde -->
+    <style name="Theme.Green" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/green_600</item>
+        <item name="colorOnPrimary">@color/green_100</item>
+        <item name="android:windowBackground">@color/green_500</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:colorControlNormal">@color/white</item>
+    </style>
+
+    <!-- Tema Amarelo -->
+    <style name="Theme.Yellow" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/yellow_600</item>
+        <item name="colorOnPrimary">@color/yellow_100</item>
+        <item name="android:windowBackground">@color/yellow_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tema Laranja -->
+    <style name="Theme.Orange" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/orange_600</item>
+        <item name="colorOnPrimary">@color/orange_100</item>
+        <item name="android:windowBackground">@color/orange_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tema Roxo -->
+    <style name="Theme.Purple" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/purple_600</item>
+        <item name="colorOnPrimary">@color/purple_100</item>
+        <item name="android:windowBackground">@color/purple_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tema Roxo Escuro -->
+    <style name="Theme.DeepPurple" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/deep_purple_600</item>
+        <item name="colorOnPrimary">@color/deep_purple_100</item>
+        <item name="android:windowBackground">@color/deep_purple_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tema Índigo -->
+    <style name="Theme.Indigo" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/indigo_600</item>
+        <item name="colorOnPrimary">@color/indigo_100</item>
+        <item name="android:windowBackground">@color/indigo_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tema Laranja Escuro -->
+    <style name="Theme.DeepOrange" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/deep_orange_600</item>
+        <item name="colorOnPrimary">@color/deep_orange_100</item>
+        <item name="android:windowBackground">@color/deep_orange_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tema Azul Esverdeado -->
+    <style name="Theme.Teal" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/teal_600</item>
+        <item name="colorOnPrimary">@color/teal_100</item>
+        <item name="android:windowBackground">@color/teal_500</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Estilo para o FloatingActionButton -->
+    <style name="FabStyle" parent="Base.Theme.SimpleNote">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="android:tint">@color/black</item>
     </style>
 </resources>
