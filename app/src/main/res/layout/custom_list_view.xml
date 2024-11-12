@@ -66,6 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    style="@style/TextColor"
                     android:id="@+id/noteTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -74,7 +75,6 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/Sample_note_title"
-                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -84,13 +84,13 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
+                    style="@style/TextColor"
                     android:id="@+id/nDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/Date"
-                    android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -99,12 +99,12 @@
                     app:layout_constraintVertical_bias="0.14999998" />
 
                 <TextView
+                    style="@style/TextColor"
                     android:id="@+id/nTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="@string/Time"
-                    android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@+id/nDate"

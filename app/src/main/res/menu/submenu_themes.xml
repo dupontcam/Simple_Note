@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/theme_blue"
-        android:title="@string/theme_blue"
-        android:orderInCategory="300"/>
+        android:orderInCategory="300"
+        android:title="@string/theme_blue" />
     <item
         android:id="@+id/theme_green"
         android:title="@string/theme_green"
         android:orderInCategory="400"/>
     <item
-        android:id="@+id/theme_yellow"
-        android:title="@string/theme_yellow"
+        android:id="@+id/theme_amber"
+        android:title="@string/theme_amber"
         android:orderInCategory="500"/>
     <item
         android:id="@+id/theme_orange"

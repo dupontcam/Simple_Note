@@ -2,7 +2,7 @@
     <style name="Base.Theme.SimpleNote" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Tema Claro -->
         <item name="colorPrimary">@color/blue_grey_400</item>
-        <item name="colorOnPrimary">@color/ambar_50</item>
+        <item name="colorOnPrimary">@color/amber_50</item>
         <item name="android:windowBackground">@color/blue_grey_50</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:colorControlNormal">@color/black</item> <!-- Ícones do menu -->
@@ -19,6 +19,10 @@
     <style name="ThemePopupStyle" parent="Widget.Material3.PopupMenu">
         <item name="android:popupBackground">?attr/colorPrimary</item>
         <item name="android:textColorPrimary">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextColor">
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <!-- Tema Azul -->
@@ -39,11 +43,11 @@
         <item name="android:colorControlNormal">@color/black</item>
     </style>
 
-    <!-- Tema Amarelo -->
-    <style name="Theme.Yellow" parent="Base.Theme.SimpleNote">
-        <item name="colorPrimary">@color/yellow_700</item>
-        <item name="colorOnPrimary">@color/yellow_100</item>
-        <item name="android:windowBackground">@color/yellow_50</item>
+    <!-- Tema Amber -->
+    <style name="Theme.Amber" parent="Base.Theme.SimpleNote">
+        <item name="colorPrimary">@color/amber_700</item>
+        <item name="colorOnPrimary">@color/amber_100</item>
+        <item name="android:windowBackground">@color/amber_50</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:colorControlNormal">@color/black</item>
     </style>

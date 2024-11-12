@@ -93,8 +93,7 @@ AndroidManifest.xml  # Configuração principal do aplicativo
     - Comunidade de desenvolvedores Android
     
     Espero que este tutorial seja útil para os usuários que desejam instalar o aplicativo
-    Simple Note localmente. Você pode personalizá-lo ainda mais, adicionando capturas de
-    tela ou informações específicas sobre seu aplicativo. 😉
+    Simple Note localmente. 😉
 
 
 ## 🎯 Como Usar

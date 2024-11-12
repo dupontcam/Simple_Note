@@ -166,8 +166,8 @@ public class MainActivity extends AppCompatActivity {
                     applyThemeFromPreferences(this);
                     recreate();
                     return true;
-                } else if (itemId == R.id.theme_yellow) {
-                    saveThemePreference("YellowTheme");
+                } else if (itemId == R.id.theme_amber) {
+                    saveThemePreference("AmberTheme");
                     applyThemeFromPreferences(this);
                     recreate();
                     return true;

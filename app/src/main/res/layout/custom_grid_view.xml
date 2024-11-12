@@ -15,21 +15,21 @@
         android:padding="16dp">
 
         <TextView
+            style="@style/TextColor"
             android:id="@+id/noteTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Sample_note_title"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
+            style="@style/TextColor"
             android:id="@+id/noteDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="3"
             android:text="@string/Sample_note_description"
-            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 

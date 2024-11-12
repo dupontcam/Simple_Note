@@ -19,8 +19,8 @@ public class ThemeUtils {
                     case "GreenTheme":
                         activity.setTheme(R.style.Theme_Green);
                         break;
-                    case "YellowTheme":
-                        activity.setTheme(R.style.Theme_Yellow);
+                    case "AmberTheme":
+                        activity.setTheme(R.style.Theme_Amber);
                         break;
                     case "OrangeTheme":
                         activity.setTheme(R.style.Theme_Orange);
