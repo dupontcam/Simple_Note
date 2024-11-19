@@ -17,6 +17,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
+import androidx.core.net.ParseException;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,9 +26,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import br.com.cursoandroid.simplenote.adapter.Adapter;
 import br.com.cursoandroid.simplenote.database.NoteDatabase;
@@ -76,13 +82,27 @@ public class MainActivity extends AppCompatActivity {
         if (notes == null) {
             notes = new ArrayList<>();
         } else {
-            // Ordena a lista em ordem decrescente por data e hora
+            // Ordena a lista em ordem decrescente apenas por data
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
             Collections.sort(notes, (note1, note2) -> {
-                int dateComparison = note2.getDate().compareTo(note1.getDate());
-                if (dateComparison == 0) {
-                    return note2.getTime().compareTo(note1.getTime());
+                try {
+                    Date date1 = dateFormatter.parse(note1.getDate());
+                    Date date2 = dateFormatter.parse(note2.getDate());
+                    int dateComparison = date2.compareTo(date1); // Comparar datas em ordem decrescente
+                    if (dateComparison == 0) { // Se as datas forem iguais, comparar horas
+                        Date time1 = timeFormatter.parse(note1.getTime());
+                        Date time2 = timeFormatter.parse(note2.getTime());
+                        return time2.compareTo(time1); // Comparar horas em ordem decrescente
+                    }
+                    return dateComparison;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return 0; // Ou outro valor padrão em caso de erro
+                } catch (java.text.ParseException e) {
+                    throw new RuntimeException(e);
                 }
-                return dateComparison;
             });
         }
 
