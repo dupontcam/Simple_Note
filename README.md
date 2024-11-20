@@ -107,7 +107,6 @@ AndroidManifest.xml  # Configuração principal do aplicativo
 
 ## 🚧 Melhorias Futuras
 
-    - Adicionar personalização feita pelo próprio usuário.
     - Adicionar Backup e Sincronização.
     - Transcrição de áudio.
 
